@@ -328,9 +328,6 @@ interface Product{
   }
 
 
-
-
-
     return(<FlatList 
      data={products}
       keyExtractor={(item, index) => index.toString()}
