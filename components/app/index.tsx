@@ -4,6 +4,7 @@ import WeatherApp from "@/components/WeatherApp";
 import ColorPicker from "@/components/ColorPicker";
 import TodoList from "@/components/TodoList";
 import UserProfileManager from "@/components/Profile";
+import CustomHookForm from "@/components/CustomHookForm";
 export default function Index() {
   return (
     <View>
@@ -11,7 +12,8 @@ export default function Index() {
       {/* <WeatherApp/> */}
       {/* <ColorPicker/> */}
       {/* <TodoList/> */}
-      <UserProfileManager/>
+      {/* <UserProfileManager/> */}
+      <CustomHookForm/>
     </View>
   );
 }
