@@ -1,45 +1,38 @@
-import { View, Text, TextInput,Button, FlatList, Pressable  } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, TextInput, FlatList, Button, Pressable } from 'react-native'
+import { useState } from 'react'
 
-interface Todo {
-  id: string;
-  text: string;
+interface Todo{
+  id: string
+  task: string
 }
-
-// Define the type for the renderTodo function parameter
-interface TodoItemProps {
-  item: Todo;
-}
-
 
 const TodoList = () => {
-  const [todo, setTodo] = useState<Todo[]>([]);
-  const [text, setText] = useState<string>('');
+const [todos, setTodos] = useState<Todo[]>([])
+const [task, setTask] = useState<string>('')
 
-const addTodo = () => {
-   if(text.trim()){
-      setTodo([...todo, {id:Date.now().toString(), text}]);
-       setText('');
-   }
+
+//add todo here
+const addTodos = () =>{
+  setTodos([...todos, {id:Date.now(), task}])
+  setTask('')
 }
 
-const removeTodo = (id: string) => {
-  setTodo(todo.filter((todo) => todo.id !== id));
-}
- 
 
-const renderTodo =({item}: TodoItemProps) => (
-  <Pressable onPress={() => removeTodo(item.id)}  style={{padding: 10, borderBottomWidth: 1, borderBottomColor: 'gray', marginTop:10}}>
-    <Text>{item.text}</Text>
-  </Pressable>
-)
+//remove todo here
+const removeTodos = (id: number) =>{
+  setTodos(todos.filter((todo) => todo.id !== id))
+}
+//update todo here
+
+//render todos here
+
+
   return (
-    <View style={{padding: 20}}>
-      <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 20, textAlign: 'center' , textTransform: 'uppercase'}}>Todo List</Text>
-      <TextInput style={{borderWidth: 1, borderColor: 'gray', padding: 10, marginBottom: 20}} placeholder="Add a new task" value={text} onChangeText={setText}/>
-      <Button title="Add Task" onPress={addTodo} />
-        <FlatList  data={todo} renderItem={renderTodo} keyExtractor={(item) => item.id} />
-        
+    <View>
+      <Text>My Todos</Text>
+      <TextInput value={task} placeholder='Enter your todo' onChangeText={setTask}/>
+      <Button title='Add Todo' onPress={addTodos}/>
+      <FlatList data={todos} keyExtractor={item => item.id.toString()} renderItem={({item}) => <Pressable  onPress={removeTodos}><Text>{item.task}</Text></Pressable>}/>
     </View>
   )
 }
